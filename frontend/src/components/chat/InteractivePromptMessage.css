@@ -1,0 +1,239 @@
+/* Inline Interactive Prompt Message Card */
+.inline-prompt-card {
+  background: var(--color-surface-elevated);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin: var(--space-4) 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.inline-prompt-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-secondary, var(--color-accent))
+  );
+}
+
+/* Header */
+.inline-prompt-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.inline-prompt-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.inline-prompt-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.inline-prompt-description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-4) 0;
+  line-height: 1.5;
+}
+
+/* Questions Container */
+.inline-prompt-questions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Individual Question */
+.inline-prompt-question {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.inline-prompt-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  display: block;
+}
+
+.inline-required-star {
+  color: var(--color-error);
+  margin-left: var(--space-1);
+}
+
+/* Text/Number Inputs */
+.inline-prompt-input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  background: var(--color-surface-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.inline-prompt-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb, 99, 102, 241), 0.1);
+}
+
+.inline-prompt-input.error {
+  border-color: var(--color-error);
+}
+
+.inline-prompt-input.error:focus {
+  box-shadow: 0 0 0 3px rgba(var(--color-error-rgb, 239, 68, 68), 0.1);
+}
+
+.inline-prompt-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Radio Group */
+.inline-prompt-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.inline-prompt-radio-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.inline-prompt-radio-label:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.inline-prompt-radio {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+.inline-prompt-radio:disabled {
+  cursor: not-allowed;
+}
+
+/* Checkbox Group */
+.inline-prompt-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.inline-prompt-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.inline-prompt-checkbox-label:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.inline-prompt-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+.inline-prompt-checkbox:disabled {
+  cursor: not-allowed;
+}
+
+/* Other Option Wrapper */
+.inline-prompt-other-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-left: var(--space-5);
+}
+
+.inline-prompt-other-input {
+  margin-top: var(--space-1);
+}
+
+/* Error Display */
+.inline-prompt-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-top: var(--space-1);
+}
+
+.inline-prompt-error svg {
+  flex-shrink: 0;
+}
+
+/* Hint Text */
+.inline-prompt-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}
+
+/* Footer */
+.inline-prompt-footer {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.inline-prompt-hint-text {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  margin: 0;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .inline-prompt-card {
+    padding: var(--space-4);
+  }
+
+  .inline-prompt-title {
+    font-size: var(--text-base);
+  }
+
+  .inline-prompt-questions {
+    gap: var(--space-3);
+  }
+}

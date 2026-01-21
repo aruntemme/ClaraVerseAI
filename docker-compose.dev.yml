@@ -1,0 +1,66 @@
+services:
+  # Development frontend with HMR
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: builder
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - frontend-node-modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev -- --host 0.0.0.0
+    networks:
+      - claraverse-network
+
+  # Development backend with air hot reload
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+      - backend-go-cache:/go/pkg/mod
+    environment:
+      - ENVIRONMENT=development
+      - DATABASE_URL=mysql://claraverse_user:${MYSQL_PASSWORD:-claraverse_pass_2024}@mysql:3306/claraverse?parseTime=true
+      - MONGODB_URI=mongodb://mongodb:27017/claraverse
+      - REDIS_URL=redis://redis:6379
+      - SEARXNG_URLS=http://searxng:8080
+      - E2B_SERVICE_URL=http://e2b-service:8001
+      - CGO_ENABLED=1
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      searxng:
+        condition: service_healthy
+      e2b-service:
+        condition: service_healthy
+    networks:
+      - claraverse-network
+    ports:
+      - "3001:3001"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3001/health"]
+      interval: 10s
+      timeout: 5s
+      start_period: 60s  # Give Air time for initial build
+      retries: 10  # More retries to handle Air restarts
+
+volumes:
+  frontend-node-modules:
+    driver: local
+  backend-go-cache:
+    driver: local
+
+networks:
+  claraverse-network:
+    driver: bridge
