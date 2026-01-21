@@ -23,6 +23,14 @@ ClaraVerse is a private AI workspace that combines chat, image generation, and v
 
 **50,000+ downloads** — the only AI platform where conversations never touch the server, even when self-hosted.
 
+### Try It Out
+
+| Option | Description |
+|--------|-------------|
+| [**Cloud**](https://claraverse.app) | Free hosted version with TEE-secured inference — no setup required |
+| [**Desktop**](https://github.com/claraverse-space/ClaraVerse) | Standalone Electron app for Windows, macOS, Linux (3.7k+ stars) |
+| **Self-Hosted** | Docker deployment (this repo) — full control on your infrastructure |
+
 ---
 
 ## Key Features
@@ -160,5 +168,7 @@ Opens a 4-pane terminal with Backend, Frontend, E2B Service, and Info panel.
 **Built with love by the ClaraVerse Community**
 
 [Back to Top](#your-private-ai-workspace)
+
+Build your own private AI workspace with ClaraVerseAI 🌸
 
 </div>
