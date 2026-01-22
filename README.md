@@ -2,16 +2,18 @@
 
 <img src="docs/images/image-banner.png" alt="ClaraVerse - Your Private AI Workspace" width="800" />
 
-### Your Private AI Workspace
+### **Your Private AI Workspace**
 
-*One app replaces ChatGPT, Midjourney, and N8N. Local or cloud — your data stays yours.*
+*Built by the community, for the community. Private AI that respects your freedom.*
+
+<p>
 
 [![License](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/claraverse-space/ClaraVerseAI?style=social)](https://github.com/claraverse-space/ClaraVerseAI/stargazers)
-[![GitHub Release](https://img.shields.io/github/v/release/claraverse-space/ClaraVerseAI)](https://github.com/claraverse-space/ClaraVerseAI/releases)
-[![Discord](https://img.shields.io/discord/1332357374635888713?color=7289da&label=Discord&logo=discord&logoColor=white)](https://discord.com/invite/j633fsrAne)
+[![Docker Pulls](https://img.shields.io/docker/pulls/claraverseoss/claraverse?color=blue)](https://hub.docker.com/r/claraverseoss/claraverse)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289da?logo=discord&logoColor=white)](https://discord.com/invite/j633fsrAne)
 
-[Website](https://claraverse.space) | [Documentation](backend/docs/) | [Discord](https://discord.com/invite/j633fsrAne)
+[Website](https://claraverse.space) · [Documentation](#documentation) · [Quick Start](#quick-start) · [Community](#community) · [Contributing](#contributing)
 
 </div>
 
@@ -23,13 +25,15 @@ ClaraVerse is a private AI workspace that combines chat, image generation, and v
 
 **50,000+ downloads** — the only AI platform where conversations never touch the server, even when self-hosted.
 
+<img src="docs/images/clara-chat-demo.gif" alt="ClaraVerse Demo" width="800" />
+
 ### Try It Out
 
 | Option | Description |
 |--------|-------------|
 | [**Cloud**](https://claraverse.app) | Free hosted version with TEE-secured inference — no setup required |
 | [**Desktop**](https://github.com/claraverse-space/ClaraVerse) | Standalone Electron app for Windows, macOS, Linux (3.7k+ stars) |
-| **Self-Hosted** | Docker deployment (this repo) — full control on your infrastructure |
+| [**Self-Hosted**](#quick-start) | Docker deployment (this repo) — full control on your infrastructure |
 
 ---
 
@@ -46,34 +50,61 @@ ClaraVerse is a private AI workspace that combines chat, image generation, and v
 | **Code Execution** | Run Python/JS in sandboxed E2B (local Docker, no API key needed) |
 | **Memory System** | Clara remembers context, auto-archives what's not used |
 | **BYOK** | Bring your own API keys or use free local models |
-| **Cross-Platform** | Web, Desktop (Windows, macOS, Linux), mobile-ready |
 
 ---
 
 ## Quick Start
 
+**Install CLI:**
+```bash
+curl -fsSL https://get.claraverse.app | bash
+```
+
+**Start ClaraVerse:**
+```bash
+claraverse init
+```
+
+Open **http://localhost** → Register → Add AI provider → Start chatting!
+
+<details>
+<summary><b>Other options</b></summary>
+
+**Docker (no CLI):**
+```bash
+docker run -d -p 80:80 -p 3001:3001 -v claraverse-data:/data claraverseoss/claraverse:latest
+```
+
+**Clone & Run:**
+```bash
+git clone https://github.com/claraverse-space/ClaraVerseAI.git && cd ClaraVerseAI && ./quickstart.sh
+```
+
+</details>
+
+<details>
+<summary><b>Advanced Setup & Troubleshooting</b></summary>
+
 ### Prerequisites
-- Docker & Docker Compose
+- Docker & Docker Compose installed
 - 4GB RAM minimum (8GB recommended)
 
-### Installation
+### Manual Installation
 
 ```bash
-# Clone the repository
+# 1. Clone
 git clone https://github.com/claraverse-space/ClaraVerseAI.git
 cd ClaraVerseAI
 
-# Configure environment (generate secrets)
-# ENCRYPTION_MASTER_KEY: openssl rand -hex 32
-# JWT_SECRET: openssl rand -hex 64
+# 2. Configure
+cp .env.default .env
 
-# Start all services
+# 3. Start
 docker compose up -d
-```
 
-### Access Points
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:3001
+# 4. Verify
+docker compose ps
+```
 
 ### Default Admin
 ```
@@ -82,12 +113,24 @@ Password: admin
 ```
 **Change the password on first login.**
 
-### What's Running
-- Frontend (React + Vite)
-- Backend (Go API)
-- MongoDB, MySQL, Redis
-- E2B (local code execution)
-- SearXNG (self-hosted search)
+### Troubleshooting
+
+```bash
+# Run diagnostics
+./diagnose.sh     # Linux/Mac
+diagnose.bat      # Windows
+
+# View logs
+docker compose logs -f backend
+
+# Restart
+docker compose restart
+
+# Fresh start
+docker compose down -v && docker compose up -d
+```
+
+</details>
 
 ---
 
@@ -123,12 +166,12 @@ Opens a 4-pane terminal with Backend, Frontend, E2B Service, and Info panel.
 
 | Resource | Description |
 |----------|-------------|
-| [Architecture Guide](backend/docs/ARCHITECTURE.md) | System design and components |
-| [API Reference](backend/docs/API_REFERENCE.md) | REST and WebSocket API |
-| [Developer Guide](backend/docs/DEVELOPER_GUIDE.md) | Local development setup |
-| [Security Guide](backend/docs/FINAL_SECURITY_INSPECTION.md) | Security features |
-| [Admin Guide](backend/docs/ADMIN_GUIDE.md) | System administration |
-| [Quick Reference](backend/docs/QUICK_REFERENCE.md) | Common commands |
+| [Architecture Guide](docs/ARCHITECTURE.md) | System design and components |
+| [API Reference](docs/API_REFERENCE.md) | REST and WebSocket API |
+| [Developer Guide](docs/DEVELOPER_GUIDE.md) | Local development setup |
+| [Security Guide](docs/FINAL_SECURITY_INSPECTION.md) | Security features |
+| [Admin Guide](docs/ADMIN_GUIDE.md) | System administration |
+| [Quick Reference](docs/QUICK_REFERENCE.md) | Common commands |
 
 ---
 
